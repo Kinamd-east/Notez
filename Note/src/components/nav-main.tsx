@@ -3,7 +3,6 @@ import { toast } from "sonner";
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -48,7 +47,11 @@ export function NavMain({
     if (!title || !note) return;
 
     try {
-      const userId = user?.id; // or however you're storing the logged-in user
+      const userId = String(user?.id); // or however you're storing the logged-in user
+      if (!user?.id) {
+        console.error("User ID is missing");
+        return;
+      }
       const userRef = doc(db, "users", userId);
       const noteId = crypto.randomUUID(); // Unique ID for this note
 
@@ -69,7 +72,7 @@ export function NavMain({
       toast.success("Note successfully added");
       setIsDialogOpen(false); // ✅ Close dialog on success
     } catch (err) {
-      toast.error(err);
+      toast.error(err instanceof Error ? err.message : String(err));
       console.error("Error adding note:", err);
     }
   };

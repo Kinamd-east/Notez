@@ -2,10 +2,8 @@ import { AppSidebar } from "@/components/app-sidebar";
 // import { DataTable } from "@/components/data-table"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Outlet } from "react-router-dom";
-import useTelegramUser from "@/hooks/useTelegramUser";
 
 export default function Layout() {
-  const user = useTelegramUser();
   return (
     <div>
       <SidebarProvider
