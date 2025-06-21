@@ -1,4 +1,4 @@
-require('dotenv')
+require('dotenv').config()
 // index.js
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express')
@@ -15,8 +15,23 @@ const bot = new TelegramBot(token, { polling: true });
 // Listen for /start command
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, '👋 Hello, welcome to your personal notes app where your notes are saved and encrypted.');
+
+  bot.sendMessage(chatId, '👋 Welcome to Notez, your encrypted notes app.', {
+    reply_markup: {
+      inline_keyboard: [
+        [
+          {
+            text: "📝 Open App",
+            web_app: {
+              url: "https://notez-lilac.vercel.app", // replace with your actual web app URL
+            },
+          },
+        ],
+      ],
+    },
+  });
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
