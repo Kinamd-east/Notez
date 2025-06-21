@@ -1,6 +1,11 @@
 require('dotenv')
 // index.js
 const TelegramBot = require('node-telegram-bot-api');
+const express = require('express')
+
+
+const app = express();
+app.use(cors());
 
 // Replace with your real token
 const token = process.env.TELEGRAM_API_KEY;
