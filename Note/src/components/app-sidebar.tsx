@@ -128,15 +128,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <div className="font-medium flex flex-row gap-1">
                       <span className="truncate">
-                        {user?.first_name || "FirstName"}
+                        {user?.first_name}
                       </span>
                       <span className="truncate">
-                        {user?.last_name || "LastName"}
+                        {user?.last_name}
                       </span>
                     </div>
 
                     <span className="text-muted-foreground truncate text-xs">
-                      {user?.username || "username"}
+                      {user?.username}
                     </span>
                   </div>
                   {/* <IconDotsVertical className="ml-auto size-4" /> */}

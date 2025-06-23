@@ -16,9 +16,12 @@ useEffect(() => {
 
     const tgUser = tg?.initDataUnsafe?.user;
 
+    console.log("🔍 Telegram WebApp User:", tgUser);
+
     let cleanUser;
 
-    if (tgUser) {
+    if (tgUser?.id) {
+      // You're inside Telegram
       cleanUser = {
         id: tgUser.id,
         username: tgUser.username,
@@ -29,11 +32,9 @@ useEffect(() => {
         notes: [],
       };
     } else {
-      // 🔒 Get or generate a persistent guest ID
+      // Not in Telegram, fallback to guest
       const existingGuestId = localStorage.getItem("guest_user_id");
       const guestId = existingGuestId || `guest-${Date.now()}`;
-
-      // If it's new, store it in localStorage
       if (!existingGuestId) {
         localStorage.setItem("guest_user_id", guestId);
       }
@@ -71,6 +72,7 @@ useEffect(() => {
 
   init();
 }, []);
+
 
 
 

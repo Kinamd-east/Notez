@@ -32,9 +32,6 @@ bot.onText(/\/start/, (msg) => {
   });
 });
 
-bot.on('message', (msg) => {
-  bot.sendMessage(msg.chat.id, 'I got your message!');
-});
 
 
 
