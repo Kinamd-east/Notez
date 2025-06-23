@@ -1,4 +1,5 @@
 import * as React from "react";
+// import { useState } from "react";
 
 import {
   DropdownMenu,
@@ -32,6 +33,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 const data = {
@@ -89,10 +91,22 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  const handleLinkClick = () => {
+    if (isMobile) setOpenMobile(false); // close sidebar
+  };
+
+
   // const { isMobile } = useSidebar();
   const user = useTelegramUser();
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar
+      collapsible="offcanvas"
+      {...props}
+      // onOpenChange={setIsOpen}
+      {...props}
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -101,7 +115,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               className="data-[slot=sidebar-menu-button]:!p-1.5"
             >
               <a href="#">
-                <img src="/images/black.png" alt="" className="w-[2rem] h-[2rem]" />
+                <img
+                  src="/images/black.png"
+                  alt=""
+                  className="w-[2rem] h-[2rem]"
+                />
                 <span className="text-base font-semibold">Notez</span>
               </a>
             </SidebarMenuButton>
@@ -109,7 +127,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={data.navMain} onLinkClick={handleLinkClick} />
         {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
@@ -127,12 +145,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   {/* </Avatar> */}
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <div className="font-medium flex flex-row gap-1">
-                      <span className="truncate">
-                        {user?.first_name}
-                      </span>
-                      <span className="truncate">
-                        {user?.last_name}
-                      </span>
+                      <span className="truncate">{user?.first_name}</span>
+                      <span className="truncate">{user?.last_name}</span>
                     </div>
 
                     <span className="text-muted-foreground truncate text-xs">
@@ -151,10 +165,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <DropdownMenuLabel className="p-0 font-normal">
                   <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                     {/* <Avatar className="h-8 w-8 rounded-lg"> */}
-                    {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
-                    {/* <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              {/* <AvatarImage src={user.avatar} alt={user.name} /> */}
+              {/* <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                     </Avatar> */}
-                    {/* <div className="grid flex-1 text-left text-sm leading-tight">
+              {/* <div className="grid flex-1 text-left text-sm leading-tight">
                       <span className="truncate font-medium">
                         {user?.first_name || "User's name"}
                       </span>

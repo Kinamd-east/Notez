@@ -30,12 +30,14 @@ import { db } from "../firebase";
 
 export function NavMain({
   items,
+  onLinkClick,
 }: {
   items: {
     title: string;
     url: string;
     icon?: React.ComponentType;
   }[];
+  onLinkClick?: () => void;
 }) {
   const user = useTelegramUser();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -137,7 +139,9 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <Link to={item.url}>
+              <Link to={item.url} onClick={onLinkClick}>
+                {" "}
+                {/* ✅ use the prop here */}
                 <SidebarMenuButton
                   tooltip={item.title}
                   className="cursor-pointer"
