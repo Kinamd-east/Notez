@@ -5,9 +5,17 @@ import { db } from "./firebase";
 import { Toaster } from "@/components/ui/sonner";
 import { setDoc, doc, getDoc } from "firebase/firestore";
 import Layout from "./pages/Layout";
+import telegramAnalytics from '@telegram-apps/analytics';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    telegramAnalytics.init({
+    token: import.meta.env.VITE_TG_ANALYTICS, // SDK Auth token received via @DataChief_bot
+    appName: "notez", // The analytics identifier you entered in @DataChief_bot
+  });
+  }, [])
 
   useEffect(() => {
     const init = async () => {
@@ -22,8 +30,10 @@ const App = () => {
       let cleanUser;
 
       if (!tgUser) {
-  console.warn("⚠️ No Telegram user detected. Falling back to guest mode.");
-}
+        console.warn(
+          "⚠️ No Telegram user detected. Falling back to guest mode."
+        );
+      }
 
       if (tgUser?.id) {
         cleanUser = {

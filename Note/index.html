@@ -10,6 +10,20 @@
   <body>
     <div id="root"></div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script
+      async
+      src="https://tganalytics.xyz/index.js"
+      onload="initAnalytics()"
+      type="text/javascript"
+    ></script>
+    <script>
+      function initAnalytics() {
+        window.telegramAnalytics.init({
+          token: "YOUR_TOKEN", // SDK Auth token received via @DataChief_bot
+          appName: "notez", // The analytics identifier you entered in @DataChief_bot
+        });
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
