@@ -14,14 +14,14 @@ useEffect(() => {
     const tg = window.Telegram?.WebApp;
     tg?.ready();
 
+    console.log("✅ Telegram Object:", tg);
+    console.log("✅ initDataUnsafe:", tg?.initDataUnsafe);
+    console.log("✅ tgUser:", tg?.initDataUnsafe?.user);
+
     const tgUser = tg?.initDataUnsafe?.user;
-
-    console.log("🔍 Telegram WebApp User:", tgUser);
-
     let cleanUser;
 
     if (tgUser?.id) {
-      // You're inside Telegram
       cleanUser = {
         id: tgUser.id,
         username: tgUser.username,
@@ -32,7 +32,6 @@ useEffect(() => {
         notes: [],
       };
     } else {
-      // Not in Telegram, fallback to guest
       const existingGuestId = localStorage.getItem("guest_user_id");
       const guestId = existingGuestId || `guest-${Date.now()}`;
       if (!existingGuestId) {
