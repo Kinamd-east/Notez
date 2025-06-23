@@ -32,6 +32,11 @@ bot.onText(/\/start/, (msg) => {
   });
 });
 
+bot.on('message', (msg) => {
+  bot.sendMessage(msg.chat.id, 'I got your message!');
+});
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
